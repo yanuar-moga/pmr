@@ -93,14 +93,14 @@ fetch(sheetURL)
 
       let html = "";
 
-      rows.forEach(row => {
-          const no = row.c[0]?.v || "";
-          const nama = row.c[1]?.v || "";
-          const stamp = row.c[2]?.v || "";
-          const fotoID = row.c[3]?.v || "";
+      rows.forEach((row, index) => {
+          const no = index + 1; // nomor otomatis berdasarkan baris
+          const nama = row.c[0]?.v || "";
+          const stamp = row.c[1]?.v || "";
+          const fotoID = row.c[2]?.v || "";
 
-          // Jika tidak ada foto → pakai default
-          const fotoURL = fotoID 
+          // Foto default dari assets
+          const fotoURL = fotoID
               ? `https://drive.google.com/uc?id=${fotoID}`
               : "assets/noimage.jpg";
 
