@@ -2,68 +2,107 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Dokumentasi Kegiatan PMR</title>
+<title>Dokumentasi & Arsip PMR SPENSAMO</title>
 
 <style>
 body {
     font-family: Arial, sans-serif;
-    background: #f2f2f2;
+    background: #f7f7f7;
     margin: 0;
     padding: 20px;
 }
 
-h2 {
-    text-align: center;
-    color: #b00020;
-}
-
-.kegiatan {
-    max-width: 700px;
+/* Container utama */
+.container {
+    max-width: 900px;
     margin: auto;
+    text-align: center;
 }
 
-a {
-    display: block;
+/* Logo */
+.logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* Judul */
+h2 {
+    color: #b00020;
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+/* Grid Menu */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Card menu */
+.card {
     background: white;
-    padding: 12px 15px;
-    margin: 10px 0;
-    border-radius: 10px;
+    border-radius: 15px;
+    padding: 20px;
     text-decoration: none;
     color: black;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: 0.2s;
+    display: block;
 }
 
-a:hover {
+.card:hover {
     background: #b00020;
     color: white;
-    transform: scale(1.02);
+    transform: translateY(-5px);
+}
+
+/* Ikon */
+.card span {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 8px;
 }
 </style>
 </head>
 
 <body>
 
-<h2>📸 Dokumentasi Kegiatan PMR SPENSAMO</h2>
+<div class="container">
 
-<div class="kegiatan">
+    <img src="assets/logo.png" class="logo">
 
-<!-- ========================================= -->
-<!--   GANTI NAMA & LINK FOLDER DISINI SAJA  -->
-<!-- ========================================= -->
+    <h2>📁 Arsip Resmi PMR Wira SMP Negeri 1 Moga</h2>
 
-<a href="kegiatan.html?judul=Latihan+Rutin+PMR&src=https://drive.google.com/embeddedfolderview?id=1dr-ca4Ev0sP-UxYa-54kAzyuutc_OwID#grid">
-📂 Latihan Rutin PMR
-</a>
+    <div class="grid">
 
-<a href="kegiatan.html?judul=Pelatihan+Pertolongan+Pertama&src=https://drive.google.com/embeddedfolderview?id=ISI_ID_FOLDER_2#grid">
-📂 Pelatihan Pertolongan Pertama
-</a>
+        <!-- Dokumentasi Foto & Video -->
+        <a class="card" href="kegiatan.html?judul=Dokumentasi+Kegiatan+PMR&src=https://drive.google.com/embeddedfolderview?id=1dr-ca4Ev0sP-UxYa-54kAzyuutc_OwID#grid">
+            <span>📸</span>
+            Dokumentasi Foto & Video
+        </a>
 
-<a href="kegiatan.html?judul=Simulasi+Bencana&src=https://drive.google.com/embeddedfolderview?id=ISI_ID_FOLDER_3#grid">
-📂 Simulasi Bencana
-</a>
+        <!-- Data Anggota PMR -->
+        <a class="card" href="https://docs.google.com/spreadsheets/d/1VO5DFFdmHysTIZzKXFKVoRESoovyVzI4/edit?gid=861302230#gid=861302230" target="_blank">
+            <span>📋</span>
+            Data Anggota PMR
+        </a>
 
+        <!-- Materi PMR -->
+        <a class="card" href="kegiatan.html?judul=Materi+PMR&src=https://drive.google.com/embeddedfolderview?id=1YZyFN187qLB9kVwbx4-wuFo59PB_TKWv#grid">
+            <span>📚</span>
+            Materi PMR
+        </a>
+
+        <!-- SK & Program Kerja -->
+        <a class="card" href="kegiatan.html?judul=SK+dan+Program+Kerja+PMR&src=https://drive.google.com/embeddedfolderview?id=1BZ6utSfYX_fD5945ocHL05XP-B95LBxb#grid">
+            <span>🗂️</span>
+            SK & Program Kerja PMR
+        </a>
+
+    </div>
 </div>
 
 </body>
