@@ -53,13 +53,18 @@ h2 {
 }
 
 /* Text */
+.no {
+    font-size: 14px;
+    color: #666;
+}
+
 .name {
     font-size: 18px;
     font-weight: bold;
-    margin: 8px 0 5px;
+    margin: 6px 0 4px;
 }
 
-.class, .jabatan {
+.date {
     font-size: 14px;
     color: #555;
 }
@@ -83,29 +88,28 @@ const sheetURL =
 fetch(sheetURL)
   .then(res => res.text())
   .then(text => {
-      // Google mengirim JSON dengan pembungkus -> harus dipotong
       const json = JSON.parse(text.substr(47).slice(0, -2));
       const rows = json.table.rows;
 
       let html = "";
 
       rows.forEach(row => {
-          const nama = row.c[0]?.v || "";
-          const kelas = row.c[1]?.v || "";
-          const jabatan = row.c[2]?.v || "";
-          const fotoID = row.c[3]?.v || ""; // isi kolom Foto ID Google Drive
+          const no = row.c[0]?.v || "";
+          const nama = row.c[1]?.v || "";
+          const stamp = row.c[2]?.v || "";
+          const fotoID = row.c[3]?.v || "";
 
-          // Link foto Google Drive
+          // Jika tidak ada foto → pakai default
           const fotoURL = fotoID 
               ? `https://drive.google.com/uc?id=${fotoID}`
-              : "https://via.placeholder.com/300x200?text=No+Photo";
+              : "assets/noimage.jpg";
 
           html += `
               <div class="card">
                   <img src="${fotoURL}" class="photo">
+                  <div class="no">No: ${no}</div>
                   <div class="name">${nama}</div>
-                  <div class="class">Kelas: ${kelas}</div>
-                  <div class="jabatan">${jabatan}</div>
+                  <div class="date">Tanggal Daftar: ${stamp}</div>
               </div>
           `;
       });
