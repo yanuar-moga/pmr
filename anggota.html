@@ -117,16 +117,16 @@ fetch(sheetURL)
           const no = index + 1; // nomor = baris data
 
           const timestamp = row.c[0]?.f || row.c[0]?.v || "-";  // kolom A
-          const nama = row.c[1]?.v || "-";                      // kolom B
+
+          // NAMA DIUBAH MENJADI UPPERCASE
+          const nama = (row.c[1]?.v || "-").toUpperCase();      // kolom B
+
           const fotoID = row.c[2]?.v || "";                     // kolom C
 
-          // ============================
-          // CEK FOTO VALID
-          // Jika bukan ID Google Drive, pakai foto default
-          // Google Drive file ID biasanya panjang 25–40 karakter
-          // ============================
+          // Foto default
           let fotoURL = "assets/noimage.jpg";
 
+          // Jika ID valid, pakai Drive
           if (typeof fotoID === "string" && fotoID.length >= 15 && /^[a-zA-Z0-9_-]+$/.test(fotoID)) {
               fotoURL = `https://drive.google.com/uc?id=${fotoID}`;
           }
