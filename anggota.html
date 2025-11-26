@@ -120,10 +120,16 @@ fetch(sheetURL)
           const nama = row.c[1]?.v || "-";                      // kolom B
           const fotoID = row.c[2]?.v || "";                     // kolom C
 
-          // Foto default
-          const fotoURL = fotoID
-              ? `https://drive.google.com/uc?id=${fotoID}`
-              : "assets/noimage.jpg";
+          // ============================
+          // CEK FOTO VALID
+          // Jika bukan ID Google Drive, pakai foto default
+          // Google Drive file ID biasanya panjang 25–40 karakter
+          // ============================
+          let fotoURL = "assets/noimage.jpg";
+
+          if (typeof fotoID === "string" && fotoID.length >= 15 && /^[a-zA-Z0-9_-]+$/.test(fotoID)) {
+              fotoURL = `https://drive.google.com/uc?id=${fotoID}`;
+          }
 
           html += `
               <div class="card">
@@ -145,4 +151,3 @@ fetch(sheetURL)
 
 </body>
 </html>
-
