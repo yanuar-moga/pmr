@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Data Anggota PMR SPENSAMO</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f1f1;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+}
+
+h2 {
+    font-size: 28px;
+    color: #b00020;
+    margin-bottom: 20px;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+/* Card */
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Foto */
+.photo {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: #ddd;
+}
+
+/* Text */
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 8px 0 5px;
+}
+
+.class, .jabatan {
+    font-size: 14px;
+    color: #555;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>📋 Data Anggota PMR Wira SPENSAMO</h2>
+
+    <div id="anggotaGrid" class="grid"></div>
+</div>
+
+<script>
+// ====== URL Google Sheet GViz JSON ======
+const sheetURL =
+  "https://docs.google.com/spreadsheets/d/1VO5DFFdmHysTIZzKXFKVoRESoovyVzI4/gviz/tq?tqx=out:json&gid=861302230";
+
+// ====== Fungsi Ambil Data ======
+fetch(sheetURL)
+  .then(res => res.text())
+  .then(text => {
+      // Google mengirim JSON dengan pembungkus -> harus dipotong
+      const json = JSON.parse(text.substr(47).slice(0, -2));
+      const rows = json.table.rows;
+
+      let html = "";
+
+      rows.forEach(row => {
+          const nama = row.c[0]?.v || "";
+          const kelas = row.c[1]?.v || "";
+          const jabatan = row.c[2]?.v || "";
+          const fotoID = row.c[3]?.v || ""; // isi kolom Foto ID Google Drive
+
+          // Link foto Google Drive
+          const fotoURL = fotoID 
+              ? `https://drive.google.com/uc?id=${fotoID}`
+              : "https://via.placeholder.com/300x200?text=No+Photo";
+
+          html += `
+              <div class="card">
+                  <img src="${fotoURL}" class="photo">
+                  <div class="name">${nama}</div>
+                  <div class="class">Kelas: ${kelas}</div>
+                  <div class="jabatan">${jabatan}</div>
+              </div>
+          `;
+      });
+
+      document.getElementById("anggotaGrid").innerHTML = html;
+  })
+  .catch(err => {
+      document.getElementById("anggotaGrid").innerHTML =
+        "<p style='color:red'>Gagal memuat data! Periksa akses Sheet.</p>";
+  });
+</script>
+
+</body>
+</html>
